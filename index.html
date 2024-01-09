@@ -1,4 +1,148 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ginger's RPSLS Trainer & Predictor</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('spock.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-blend-mode: lighten;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .button-container {
+            padding: 10px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .train-buttons button {
+            background-color: #3A6D80; /* Example green background */
+            color: white; /* White text */
+            font-size: 18px; /* Larger text */
+            padding: 15px 30px; /* More padding for a larger button */
+            margin: 10px 0; /* Space out buttons */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            width: 200px; /* Set a fixed width if desired */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+        }
+
+        .train-buttons button:hover {
+            background-color: #F3CD53; /* Slightly darker shade when hovered */
+        }
+
+        .train-buttons button:active {
+            transform: translateY(3px); /* Button moves down when clicked */
+        }
+        .download-buttons button {
+            background-color: #9D402D; /* Example green background */
+            color: white; /* White text */
+            font-size: 18px; /* Larger text */
+            padding: 15px 30px; /* More padding for a larger button */
+            margin: 10px 0; /* Space out buttons */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            width: 200px; /* Set a fixed width if desired */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+        }
+
+        .download-buttons button:hover {
+            background-color:  #D56729; /* Slightly darker shade when hovered */
+        }
+
+        .download-buttons button:active {
+            transform: translateY(3px); /* Button moves down when clicked */
+        }
+
+        button {
+            background-color: #D56729;
+            font-size: 18px;
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #9D402D;
+        }
+        .sample-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .samples {
+            background-color: rgba(157, 64, 45, 0.15); /* Semi-transparent white */
+            color: rgb(0, 0, 0); /* White text */
+            border-radius: 10px;
+            padding: 10px 10px;
+            margin-top: 15px;
+            width: 15%; /* Adjust based on your content */
+            box-sizing: border-box; /* Include padding and border in the width */
+        }
+
+        #prediction {
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ginger's RPSLS Predictor</h1>
+    <video autoplay playsinline muted id="wc" width="224" height="224"></video>
+    <div class="button-container">
+        <button type="button" id="0" onclick="handleButton(this)">Rock</button>
+        <button type="button" id="1" onclick="handleButton(this)">Paper</button>
+        <button type="button" id="2" onclick="handleButton(this)">Scissors</button>
+        <button type="button" id="3" onclick="handleButton(this)">Spock</button>
+        <button type="button" id="4" onclick="handleButton(this)">Lizard</button>
+    </div>
+    <div class="button-container">
+      <div class="samples" id="rocksamples">Rock Samples: </div>
+      <div class="samples" id="papersamples">Paper Samples: </div>
+      <div class="samples" id="scissorssamples">Scissors Samples: </div>
+      <div class="samples" id="spocksamples">Spock Samples: </div>
+      <div class="samples" id="lizardsamples">Lizard Samples: </div>
+  </div>
+    <div class="train-buttons">
+        <button type="button" id="train" onclick="doTraining()">Train the Model</button>
+        <button type="button" id="startPredicting" onclick="startPredicting()">Start Predicting</button>
+    </div>
+    <div id="prediction">Prediction will be displayed here.</div>
+    <div class="download-buttons">
+      <button type="button" id="saveModel" onclick="saveModel()">Download Model</button>
+  </div>
+
+    <script src="webcam.js"></script>
+    <script src="rps-dataset.js"></script>
+    <script src="index_exercise.js"></script>
+</body>
+</html>
+
+
+
+
+
+<!-- <html>
 <head>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
 <script src="webcam.js"></script>
@@ -29,5 +173,3 @@
 </body>
 
 <script src="index_exercise.js"></script>
-<!-- <script src="C1_W4_Assignment_Solution.js"></script> -->
-</html>
